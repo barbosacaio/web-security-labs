@@ -61,3 +61,7 @@ Cross-Site Scripting is a web security vulnerability that allows an attacker to 
 - [Stored XSS into HTML context with nothing encoded](https://portswigger.net/web-security/cross-site-scripting/stored/lab-html-context-nothing-encoded)
     - This lab had a very similar situation, where the user input is being treated in an unsafe way; however, due to the data persistence (keeping comments on a database), all we need to do is add a comment with the desired malicious Javascript code
     - The goal was to add an `alert()` which is executed everytime a new user accesses that blog, and this has been completed under `./stored-xss-alert` by adding `<script>alert()</script>` as a comment
+- [DOM XSS in `document.write` sink using source `location.search`](https://portswigger.net/web-security/cross-site-scripting/dom-based/lab-document-write-sink)
+    - This lab uses `document.write`, so we can perform a test by using an unique alphanumerical string, so we can locate every response for this input -- by doing that, we can see it was added as the `src` of an `img` on `./dom-xss-img`
+    - Once we know it is present on an `img` element, we can search for something that breaks out of it and executes the script, such as `"><svg onload="alert()">`
+    - That completes the lab, on the result `./dom-xss-alert`
